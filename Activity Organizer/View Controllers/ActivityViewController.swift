@@ -7,10 +7,13 @@
 //
 
 import UIKit
-import FirebaseFirestore
 
 class ActivityViewController: UIViewController, UITextFieldDelegate, DateControllerDelegate {
-
+    
+    var currentUser: String?
+    var currentActivity: Activity?
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var timeLabel: UILabel!
@@ -18,36 +21,75 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var languageTextField: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
-    
-    let db = Firestore.firestore()
-    var currentActivity: Dictionary<String, Any>?
+    @IBOutlet weak var sgmtEditMode: UISegmentedControl!
+    @IBOutlet weak var btnChange: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(self.save))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if let user = currentUser {
+            print(user)
+        }
         
         if currentActivity != nil {
-            titleTextField.text = currentActivity!["title"] as? String
-            location.text = currentActivity!["location"] as? String
-            descriptionTextField.text = currentActivity!["description"] as? String
-            languageTextField.text = currentActivity!["language"] as? String
-            categoryTextField.text = currentActivity!["category"] as? String
-            
+            titleLabel.text = "Edit a Activity"
+            titleTextField.text = currentActivity!.title
+            location.text = currentActivity!.location
+            descriptionTextField.text = currentActivity!.intro
+            languageTextField.text = currentActivity!.language
+            categoryTextField.text = currentActivity!.category
+
             let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, h:mm a"
-            if currentActivity!["time"] != nil {
-                timeLabel.text = formatter.string(from: (currentActivity!["time"] as! Timestamp).dateValue())
+            formatter.dateFormat = "MM-dd-yyyy HH:mm"
+            if currentActivity!.time != nil {
+                timeLabel.text = formatter.string(from: currentActivity!.time!)
+            }
+            
+            if let author = currentActivity?.author {
+                print(author)
+            }
+            if let user = currentUser {
+                print(user)
+            }
+            if currentActivity?.author != currentUser {
+                sgmtEditMode.setEnabled(false, forSegmentAt: 1)
             }
         }
-        // Do any additional setup after loading the view.
+        
+        self.changeEditMode(self)
+    }
+    
+    @IBAction func changeEditMode(_ sender: Any) {
+        let textFields: [UITextField] = [titleTextField, location, descriptionTextField, languageTextField, categoryTextField]
+        if sgmtEditMode.selectedSegmentIndex == 0 {
+            for textField in textFields {
+                textField.isEnabled = false
+                textField.borderStyle = UITextField.BorderStyle.none
+            }
+            btnChange.isHidden = true
+            navigationItem.rightBarButtonItem = nil
+        }
+        else if sgmtEditMode.selectedSegmentIndex == 1{
+            for textField in textFields {
+                textField.isEnabled = true
+                textField.borderStyle = UITextField.BorderStyle.roundedRect
+            }
+            btnChange.isHidden = false
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                                target: self,
+                                                                action: #selector(self.save))
+        }
     }
     
     func dateChanged(date: Date) {
         if currentActivity == nil {
-            currentActivity = [String:Any]()
+            let context = appDelegate.persistentContainer.viewContext
+            currentActivity = Activity(context: context)
+            currentActivity!.author = currentUser
         }
-        currentActivity!["time"] = Timestamp(date: date)
+        currentActivity!.time = date
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"
         timeLabel.text = formatter.string(from: date)
@@ -56,22 +98,20 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
     @objc func save() {
         print("save tapped!")
         if currentActivity == nil {
-            currentActivity = [String:Any]()
+            let context = appDelegate.persistentContainer.viewContext
+            currentActivity = Activity(context: context)
+            currentActivity!.author = currentUser
         }
-        currentActivity!["title"] = titleTextField.text
-        currentActivity!["location"] = location.text
-        currentActivity!["description"] = descriptionTextField.text
-        currentActivity!["language"] = languageTextField.text
-        currentActivity!["category"] = categoryTextField.text
         
-        db.collection("activities").document(currentActivity!["title"] as! String).setData(currentActivity!) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
+        currentActivity!.title = titleTextField.text!
+        currentActivity!.location = location.text!
+        currentActivity!.intro = descriptionTextField.text
+        currentActivity!.language = languageTextField.text
+        currentActivity!.category = categoryTextField.text
+        appDelegate.saveContext()
+        sgmtEditMode.selectedSegmentIndex = 0
+        changeEditMode(self)
+//        navigationController?.popViewController(animated: true)
     }
 
     // MARK: - Navigation

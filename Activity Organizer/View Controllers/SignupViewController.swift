@@ -7,15 +7,13 @@
 //
 
 import UIKit
-import FirebaseAuth
-import Firebase
-import FirebaseFirestore
+import CoreData
 
 class SignupViewController: UIViewController {
 
-    @IBOutlet weak var firstName: UITextField!
-    @IBOutlet weak var lastName: UITextField!
-    @IBOutlet weak var email: UITextField!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
+    @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var signupBtn: UIButton!
     @IBOutlet weak var error: UILabel!
@@ -28,45 +26,48 @@ class SignupViewController: UIViewController {
     
     @IBAction func signupTapped(_ sender: Any) {
         // Validate the fields
-        if firstName.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            lastName.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            email.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
-            password.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
+        if username.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || password.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             // show error message
             error.text = "Please fill in all fields."
             error.alpha = 1
         } else {
             // Create cleaned versions of the data
-            let firstNameStr = firstName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let lastNameStr = lastName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let emailStr = email.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            let usernameStr = username.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let passwordStr = password.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
-            // Create the user
-            Auth.auth().createUser(withEmail: emailStr, password: passwordStr) { (result, err) in
-                // Check for errors
-                if err != nil {
-                    // There was an error creating the user
-                    self.error.text = err!.localizedDescription
-                    self.error.alpha = 1
-                }
-                else {
-                    // User was created successfully, now store the first name and last name
-                    let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: ["firstname":firstNameStr, "lastname":lastNameStr, "uid": result!.user.uid ]) { (error) in
-                        if error != nil {
-                            // Show error message
-                            self.error.text = error!.localizedDescription
-                            self.error.alpha = 1
+            // First check if the username already exists
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSManagedObject>(entityName: "User")
+            do {
+                let users = try context.fetch(request)
+                for i in users {
+                    if let u = i as? User {
+                        if u.username == usernameStr {
+                            print("Username alreay exists")
+                            return
                         }
                     }
-                    
-                    // Transition to the home screen
-                    let home = self.storyboard?.instantiateViewController(identifier: "tabBarController")
-                    self.view.window?.rootViewController = home
-                    self.view.window?.makeKeyAndVisible()
                 }
+                // Create the user
+                let user = User(context: context)
+                user.username = usernameStr
+                user.password = passwordStr
+                appDelegate.saveContext()
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
             }
+            
+            // Set current user
+            let settings = UserDefaults.standard
+            settings.set(usernameStr, forKey: "currentUser")
+            settings.synchronize()
+            
+            // Navigate to the home view
+            let home = self.storyboard?.instantiateViewController(identifier: "tabBarController")
+            self.view.window?.rootViewController = home
+            self.view.window?.makeKeyAndVisible()
         }
     }
+    
+    
 }
