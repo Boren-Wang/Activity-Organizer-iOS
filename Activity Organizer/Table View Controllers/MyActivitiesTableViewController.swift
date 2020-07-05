@@ -12,7 +12,6 @@ class MyActivitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var attendee: UILabel!
 }
 
 class MyActivitiesTableViewController: UITableViewController {

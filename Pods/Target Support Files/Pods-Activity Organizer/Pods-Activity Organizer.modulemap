@@ -1,0 +1,6 @@
+framework module Pods_Activity_Organizer {
+  umbrella header "Pods-Activity Organizer-umbrella.h"
+
+  export *
+  module * { export * }
+}

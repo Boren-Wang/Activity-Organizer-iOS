@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-//import Firebase
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         settings.synchronize()
         
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
     
         return true
     }

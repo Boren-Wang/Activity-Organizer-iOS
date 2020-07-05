@@ -7,13 +7,19 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var error: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        error.alpha = 0
     }
     
 
@@ -28,6 +34,24 @@ class LoginViewController: UIViewController {
     */
 
     @IBAction func loginTapped(_ sender: Any) {
+        // Create cleaned versions of the text field
+        let emailStr = email.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let passwordStr = password.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        // Signing in the user
+        Auth.auth().signIn(withEmail: emailStr, password: passwordStr) { (result, error) in
+            
+            if error != nil {
+                // Couldn't sign in
+                self.error.text = error!.localizedDescription
+                self.error.alpha = 1
+            }
+            else {
+                let home = self.storyboard?.instantiateViewController(identifier: "tabBarController")
+                self.view.window?.rootViewController = home
+                self.view.window?.makeKeyAndVisible()
+            }
+        }
     }
     
 }
