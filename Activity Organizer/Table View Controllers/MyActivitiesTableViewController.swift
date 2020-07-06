@@ -10,12 +10,12 @@ import UIKit
 import CoreData
 
 class MyActivitiesTableViewCell: UITableViewCell {
-
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var author: UILabel!
     @IBOutlet weak var detailBtn: UIButton!
+    @IBOutlet weak var quitBtn: UIButton!
 }
 
 class MyActivitiesTableViewController: UITableViewController {
@@ -53,7 +53,6 @@ class MyActivitiesTableViewController: UITableViewController {
                 if let u = i as? User {
                     if u.username == currentUser {
                         if let activities = u.activities {
-                            print(activities.count)
                             for object in activities {
                                 myActivities.append(object as! Activity)
                             }
@@ -108,6 +107,28 @@ class MyActivitiesTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func quitTapped(_ sender: UIButton) {
+        // Delete the activity from the joined activities list
+        let activity = myActivities[sender.tag]
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSManagedObject>(entityName: "User")
+        do {
+            let users = try context.fetch(request)
+            for i in users {
+                if let u = i as? User {
+                    if u.username == currentUser {
+                        u.removeFromActivities(activity)
+                        appDelegate.saveContext()
+                    }
+                }
+            }
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        loadDataFromDatabase()
+        tableView.reloadData()
+    }
+    
     @IBAction func logoutTapped(_ sender: UIButton) {
         // Navigate to the home view
         let welcome = self.storyboard?.instantiateViewController(identifier: "welcomeController")
@@ -160,6 +181,7 @@ class MyActivitiesTableViewController: UITableViewController {
         }
         
         cell.detailBtn.tag = indexPath.row
+        cell.quitBtn.tag = indexPath.row
 
         return cell
     }
@@ -176,7 +198,7 @@ class MyActivitiesTableViewController: UITableViewController {
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            // Delete the activity from the joined activities list
             let activity = myActivities[indexPath.row]
             
             let context = appDelegate.persistentContainer.viewContext

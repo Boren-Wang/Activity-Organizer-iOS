@@ -300,7 +300,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UW0-So-dtG">
                                     <rect key="frame" x="15" y="12" width="42" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NrP-OU-W9c">
@@ -352,7 +352,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cth-o5-0Ve">
                                                     <rect key="frame" x="0.0" y="64.5" width="65.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -571,7 +571,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="wT6-da-iMX">
                         <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="9zZ-2d-V0H">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="9zZ-2d-V0H">
                             <rect key="frame" x="158.5" y="5.5" width="97" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
@@ -628,11 +628,11 @@
             </objects>
             <point key="canvasLocation" x="5683" y="360"/>
         </scene>
-        <!--Profile-->
+        <!--My Activities-->
         <scene sceneID="bID-9M-Fog">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="72k-jK-9Rg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="baseline_account_circle_black_36pt" id="tiW-0O-TuR"/>
+                    <tabBarItem key="tabBarItem" title="My Activities" image="baseline_list_black_36dp" id="tiW-0O-TuR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="159-Wu-YAD">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -677,7 +677,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgh-MC-C8V">
                                     <rect key="frame" x="15" y="12" width="42" height="20.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -723,13 +723,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fAT-YA-Xxy">
                                                     <rect key="frame" x="0.0" y="61.5" width="65.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rWs-kb-jT5">
-                                            <rect key="frame" x="334" y="30" width="40" height="30"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="rWs-kb-jT5">
+                                            <rect key="frame" x="334" y="13.5" width="40" height="63"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4TV-qa-OFs">
                                                     <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
@@ -739,6 +739,16 @@
                                                     </state>
                                                     <connections>
                                                         <segue destination="ByO-So-JDZ" kind="show" identifier="editActivity2" id="rgh-IH-KDg"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbj-H6-Qrc">
+                                                    <rect key="frame" x="0.0" y="33" width="40" height="30"/>
+                                                    <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="Quit">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="quitTapped:" destination="C4G-gJ-rLT" eventType="touchUpInside" id="ynW-ab-dBu"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -755,6 +765,7 @@
                                     <outlet property="author" destination="fAT-YA-Xxy" id="BPL-rZ-bsq"/>
                                     <outlet property="detailBtn" destination="4TV-qa-OFs" id="i7b-HE-oGa"/>
                                     <outlet property="location" destination="38F-YZ-OIY" id="g36-ZC-5zE"/>
+                                    <outlet property="quitBtn" destination="Kbj-H6-Qrc" id="7qa-AX-QFN"/>
                                     <outlet property="time" destination="JzG-KL-sMO" id="6rQ-0C-mUj"/>
                                     <outlet property="title" destination="3v1-0z-b4h" id="hzM-de-ocT"/>
                                 </connections>
@@ -877,10 +888,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hgX-Di-1Gj"/>
+        <segue reference="rgh-IH-KDg"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="baseline_account_circle_black_36pt" width="36" height="36"/>
+        <image name="baseline_list_black_36dp" width="36" height="36"/>
         <image name="home" width="26" height="26"/>
         <image name="settings" width="32" height="32"/>
     </resources>

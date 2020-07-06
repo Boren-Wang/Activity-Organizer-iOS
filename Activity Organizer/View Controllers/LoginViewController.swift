@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginTapped(_ sender: Any) {
-        print("Login tapped")
+//        print("Login tapped")
         // Create cleaned versions of the text field
         let usernameStr = username.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let passwordStr = password.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -50,14 +50,16 @@ class LoginViewController: UIViewController {
                             self.view.window?.makeKeyAndVisible()
                             return
                         } else {
-                            print("Password does not match")
+                            error.alpha = 1
+                            error.text = "Password does not match"
                             return
                         }
                     }
                 }
             }
             // No such user
-            print("Username not found")
+            error.alpha = 1
+            error.text = "Username not found"
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }

@@ -55,6 +55,15 @@ class BrowseActivitiesTableViewController: UITableViewController {
                     if u.username == currentUser {
                         u.addToActivities(selectedActivity)
                         appDelegate.saveContext()
+                        let alertController = UIAlertController(title: "Success",
+                                                                message: "You joined an activity!\nClick 'My Activities' to see all joined activities",
+                            preferredStyle: .alert)
+                        
+                        let actionCancel = UIAlertAction(title: "Okay",
+                                                         style: .cancel,
+                                                         handler: nil)
+                        alertController.addAction(actionCancel)
+                        present(alertController, animated: true, completion: nil)
                     }
                 }
             }
@@ -114,7 +123,6 @@ class BrowseActivitiesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-//        print(activities.count)
         return activities.count
     }
 

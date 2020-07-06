@@ -43,7 +43,8 @@ class SignupViewController: UIViewController {
                 for i in users {
                     if let u = i as? User {
                         if u.username == usernameStr {
-                            print("Username alreay exists")
+                            error.text = "Username alreay exists"
+                            error.alpha = 1
                             return
                         }
                     }

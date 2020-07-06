@@ -26,9 +26,6 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let user = currentUser {
-            print(user)
-        }
         
         if currentActivity != nil {
             titleLabel.text = "Edit a Activity"
@@ -44,12 +41,6 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
                 timeLabel.text = formatter.string(from: currentActivity!.time!)
             }
             
-            if let author = currentActivity?.author {
-                print(author)
-            }
-            if let user = currentUser {
-                print(user)
-            }
             if currentActivity?.author != currentUser {
                 sgmtEditMode.setEnabled(false, forSegmentAt: 1)
             }
@@ -93,7 +84,7 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
     }
     
     @objc func save() {
-        print("save tapped!")
+//        print("Save tapped!")
         if currentActivity == nil {
             let context = appDelegate.persistentContainer.viewContext
             currentActivity = Activity(context: context)
