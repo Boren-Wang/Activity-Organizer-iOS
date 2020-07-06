@@ -1,3 +1,5 @@
+//  Name: Boren Wang
+//  SBU ID: 111385010
 //
 //  MyActivitiesTableViewController.swift
 //  Activity Organizer
@@ -9,6 +11,8 @@
 import UIKit
 import CoreData
 
+
+/// This is the class for the table cel for "Joined Activities"
 class MyActivitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
@@ -18,6 +22,8 @@ class MyActivitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var quitBtn: UIButton!
 }
 
+
+/// This is the class for "Joined Activities" table
 class MyActivitiesTableViewController: UITableViewController {
 
     var myActivities:[Activity] = []
@@ -26,11 +32,15 @@ class MyActivitiesTableViewController: UITableViewController {
     
     @IBOutlet weak var label: UILabel!
     
+    // MARK: - iOS Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
+    /// Show the current user and load the data when the user is back to the home view
+    /// - Parameter animated: specify whether you want the animation effect
     override func viewWillAppear(_ animated: Bool) {
         let settings = UserDefaults.standard
         currentUser = settings.string(forKey: "currentUser")
@@ -41,6 +51,9 @@ class MyActivitiesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // MARK: - Load data from Core Data
+    
+    /// Load all the activities from the Core Data
     func loadDataFromDatabase() {
         //Set up Core Data Context
         let context = appDelegate.persistentContainer.viewContext
@@ -107,6 +120,10 @@ class MyActivitiesTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - Functions for handling touch event
+    
+    /// Delete the activit from the user's Joined Activities list
+    /// - Parameter sender: the Quit button
     @IBAction func quitTapped(_ sender: UIButton) {
         // Delete the activity from the joined activities list
         let activity = myActivities[sender.tag]
@@ -117,8 +134,9 @@ class MyActivitiesTableViewController: UITableViewController {
             for i in users {
                 if let u = i as? User {
                     if u.username == currentUser {
+                        // Delete the activity from the user's joint activities list
                         u.removeFromActivities(activity)
-                        appDelegate.saveContext()
+                        appDelegate.saveContext() // save
                     }
                 }
             }
@@ -129,6 +147,8 @@ class MyActivitiesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    /// Logout the user
+    /// - Parameter sender: the Logout button
     @IBAction func logoutTapped(_ sender: UIButton) {
         // Navigate to the home view
         let welcome = self.storyboard?.instantiateViewController(identifier: "welcomeController")
@@ -138,16 +158,19 @@ class MyActivitiesTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
+    /// Specify the number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+    /// Specify the number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return myActivities.count
     }
 
+    /// Configure the custom tabel cell and add tag to all buttons
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "myTableCell", for: indexPath) as! MyActivitiesTableViewCell
 
@@ -180,20 +203,14 @@ class MyActivitiesTableViewController: UITableViewController {
             cell.time.text = "Time: "
         }
         
+        // add tag to buttons so that their row can be identified when the buttons are clicked
         cell.detailBtn.tag = indexPath.row
         cell.quitBtn.tag = indexPath.row
 
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+    /// Delete the activity from the user's joint activities list
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCell.EditingStyle,
                             forRowAt indexPath: IndexPath) {
@@ -208,8 +225,9 @@ class MyActivitiesTableViewController: UITableViewController {
                 for i in users {
                     if let u = i as? User {
                         if u.username == currentUser {
+                            // Delete the activity from the user's joint activities list
                             u.removeFromActivities(activity)
-                            appDelegate.saveContext()
+                            appDelegate.saveContext() // save
                         }
                     }
                 }
@@ -222,23 +240,9 @@ class MyActivitiesTableViewController: UITableViewController {
 //        tableView.reloadData()
     }
 
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // MARK: - Navigation
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editActivity2" {
             let activityController = segue.destination as? ActivityViewController

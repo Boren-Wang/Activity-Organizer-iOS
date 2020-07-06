@@ -1,3 +1,5 @@
+//  Name: Boren Wang
+//  SBU ID: 111385010
 //
 //  Constants.swift
 //  Activity Organizer
@@ -8,6 +10,7 @@
 
 import Foundation
 
+/// Store the constant for settings view
 struct Constants  {
     static let sortField = "sortField"
     static let sortDirectionAscending = "sortDirectionAscending"

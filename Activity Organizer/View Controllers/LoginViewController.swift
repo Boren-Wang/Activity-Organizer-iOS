@@ -1,3 +1,5 @@
+//  Name: Boren Wang
+//  SBU ID: 111385010
 //
 //  LoginViewController.swift
 //  Activity Organizer
@@ -9,6 +11,7 @@
 import UIKit
 import CoreData
 
+/// This class is for the login view
 class LoginViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -20,10 +23,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Hide the error label
         error.alpha = 0
     }
-
+    
+    /// Login the user and navigate to the home view
+    /// - Parameter sender: the Login button
     @IBAction func loginTapped(_ sender: Any) {
 //        print("Login tapped")
         // Create cleaned versions of the text field

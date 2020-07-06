@@ -1,4 +1,6 @@
-//
+//  Name: Boren Wang
+//  SBU ID: 111385010
+
 //  BrowseActivitiesTableViewController.swift
 //  Activity Organizer
 //
@@ -9,6 +11,7 @@
 import UIKit
 import CoreData
 
+/// This class is for the custom table cell for home view
 class BrowseActivitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var time: UILabel!
@@ -19,6 +22,7 @@ class BrowseActivitiesTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteBtn: UIButton!
 }
 
+/// This class configure is for the "Browser Activities" table
 class BrowseActivitiesTableViewController: UITableViewController {
     
     var activities:[NSManagedObject] = []
@@ -27,10 +31,14 @@ class BrowseActivitiesTableViewController: UITableViewController {
     
     @IBOutlet weak var label: UILabel!
     
+    // MARK: - iOS Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
+    /// Show the current user and load the data when the user is back to the home view
+    /// - Parameter animated: specify whether you want the animation effect
     override func viewWillAppear(_ animated: Bool) {
         let settings = UserDefaults.standard
         currentUser = settings.string(forKey: "currentUser")
@@ -42,6 +50,10 @@ class BrowseActivitiesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    // MARK: - Functions for handling touch event
+    
+    /// Add the activity to the user's 'Joined Activities' list when the user click 'Join'
+    /// - Parameter sender: the Join buttion
     @IBAction func joinTapped(_ sender: UIButton) {
         print("Join tapped")
         let selectedRow = sender.tag
@@ -72,6 +84,8 @@ class BrowseActivitiesTableViewController: UITableViewController {
         }
     }
     
+    /// Delete an activity from the home, if the user is the author of that activity
+    /// - Parameter sender: the Delete button
     @IBAction func deleteTapped(_ sender: UIButton) {
         // Delete the row from the data source
         let activity = activities[sender.tag] as? Activity
@@ -87,6 +101,8 @@ class BrowseActivitiesTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    /// Logout the user
+    /// - Parameter sender: the Logout button
     @IBAction func logoutTapped(_ sender: UIButton) {
         // Navigate to the home view
         let welcome = self.storyboard?.instantiateViewController(identifier: "welcomeController")
@@ -94,6 +110,9 @@ class BrowseActivitiesTableViewController: UITableViewController {
         self.view.window?.makeKeyAndVisible()
     }
     
+    // MARK: - Load data from Core Data
+    
+    /// Load all the activities from the Core Data
     func loadDataFromDatabase() {
         let settings = UserDefaults.standard
         let sortField = settings.string(forKey: Constants.sortField)
@@ -116,16 +135,19 @@ class BrowseActivitiesTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
+    /// Specify the number of sections
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
+    /// Specify the number of rows
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return activities.count
     }
-
+    
+    /// Configure the custom tabel cell and add tag to all buttons
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "browseTableCell", for: indexPath) as! BrowseActivitiesTableViewCell
 
@@ -158,10 +180,12 @@ class BrowseActivitiesTableViewController: UITableViewController {
             cell.time.text = "Time: "
         }
         
+        // add tag to buttons so that their row can be identified when the buttons are clicked
         cell.joinBtn.tag = indexPath.row
         cell.detailBtn.tag = indexPath.row
         cell.deleteBtn.tag = indexPath.row
 
+        // only show delete button if the current user is the author
         if activity?.author != currentUser {
             cell.deleteBtn.isHidden = true
         } else {
@@ -170,42 +194,6 @@ class BrowseActivitiesTableViewController: UITableViewController {
 
         return cell
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
 
     // MARK: - Navigation
 

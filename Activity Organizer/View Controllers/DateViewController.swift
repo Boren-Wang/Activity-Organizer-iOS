@@ -1,3 +1,5 @@
+//  Name: Boren Wang
+//  SBU ID: 111385010
 //
 //  DateViewController.swift
 //  Activity Organizer
@@ -8,10 +10,12 @@
 
 import UIKit
 
+/// The protocol is used to pass date infomation between views
 protocol DateControllerDelegate: class {
     func dateChanged(date: Date)
 }
 
+/// This class is the the date view
 class DateViewController: UIViewController {
 
     weak var delegate: DateControllerDelegate?
@@ -29,19 +33,9 @@ class DateViewController: UIViewController {
         self.title = "Pick Time"
     }
     
+    /// Call the delegate's function to update the time
     @objc func saveTime(){
         self.delegate?.dateChanged(date: picker.date)
         self.navigationController?.popViewController(animated: true)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -1,3 +1,5 @@
+//  Name: Boren Wang
+//  SBU ID: 111385010
 //
 //  SceneDelegate.swift
 //  Activity Organizer

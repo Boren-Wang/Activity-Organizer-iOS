@@ -1,3 +1,5 @@
+//  Name: Boren Wang
+//  SBU ID: 111385010
 //
 //  ActivityViewController.swift
 //  Activity Organizer
@@ -8,6 +10,7 @@
 
 import UIKit
 
+/// This class is for the Activity Details view
 class ActivityViewController: UIViewController, UITextFieldDelegate, DateControllerDelegate {
     
     var currentUser: String?
@@ -41,6 +44,7 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
                 timeLabel.text = formatter.string(from: currentActivity!.time!)
             }
             
+            // if the current user is not the author, disable the edit function
             if currentActivity?.author != currentUser {
                 sgmtEditMode.setEnabled(false, forSegmentAt: 1)
             }
@@ -49,6 +53,8 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
         self.changeEditMode(self)
     }
     
+    /// Used to enable or disable all the text fields and other controls
+    /// - Parameter sender: the segmented control
     @IBAction func changeEditMode(_ sender: Any) {
         let textFields: [UITextField] = [titleTextField, location, descriptionTextField, languageTextField, categoryTextField]
         if sgmtEditMode.selectedSegmentIndex == 0 {
@@ -71,6 +77,8 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
         }
     }
     
+    /// Change the time of the activity
+    /// - Parameter date: the date selected by the user
     func dateChanged(date: Date) {
         if currentActivity == nil {
             let context = appDelegate.persistentContainer.viewContext
@@ -83,6 +91,7 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
         timeLabel.text = formatter.string(from: date)
     }
     
+    /// Store and update the info in the Core Data
     @objc func save() {
 //        print("Save tapped!")
         if currentActivity == nil {

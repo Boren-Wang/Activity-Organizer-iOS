@@ -1,3 +1,5 @@
+//  Name: Boren Wang
+//  SBU ID: 111385010
 //
 //  SignupViewController.swift
 //  Activity Organizer
@@ -9,6 +11,7 @@
 import UIKit
 import CoreData
 
+/// This class is for the signup view
 class SignupViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -20,10 +23,13 @@ class SignupViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        // Hide the error label
         error.alpha = 0
     }
     
+    /// Create a new user and navigate to the home view
+    /// - Parameter sender: the Signup button
     @IBAction func signupTapped(_ sender: Any) {
         // Validate the fields
         if username.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || password.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
