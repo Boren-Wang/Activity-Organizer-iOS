@@ -64,6 +64,48 @@ class MyActivitiesTableViewController: UITableViewController {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        
+        // Get the user settings and sort the myActivities
+        let settings = UserDefaults.standard
+        let sortField = settings.string(forKey: Constants.sortField)
+        let sortAscending = settings.bool(forKey: Constants.sortDirectionAscending)
+        if sortField == "title" {
+            myActivities.sort(by: {
+                var res = false
+                if let first = $0.title, let second = $1.title {
+                    if sortAscending == true {
+                        res = first < second
+                    } else {
+                        res = first > second
+                    }
+                }
+                return res
+            })
+        } else if sortField == "time" {
+            myActivities.sort(by: {
+                var res = false
+                if let first = $0.time, let second = $1.time {
+                    if sortAscending == true {
+                        res = first < second
+                    } else {
+                        res = first > second
+                    }
+                }
+                return res
+            })
+        } else {
+            myActivities.sort(by: {
+                var res = false
+                if let first = $0.location, let second = $1.location {
+                    if sortAscending == true {
+                        res = first < second
+                    } else {
+                        res = first > second
+                    }
+                }
+                return res
+            })
+        }
     }
     
     @IBAction func logoutTapped(_ sender: UIButton) {

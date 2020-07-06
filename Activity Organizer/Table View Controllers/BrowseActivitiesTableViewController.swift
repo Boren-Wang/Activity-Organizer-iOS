@@ -156,6 +156,8 @@ class BrowseActivitiesTableViewController: UITableViewController {
 
         if activity?.author != currentUser {
             cell.deleteBtn.isHidden = true
+        } else {
+            cell.deleteBtn.isHidden = false
         }
 
         return cell

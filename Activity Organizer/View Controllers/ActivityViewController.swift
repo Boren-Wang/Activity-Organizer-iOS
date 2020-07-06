@@ -26,9 +26,6 @@ class ActivityViewController: UIViewController, UITextFieldDelegate, DateControl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         if let user = currentUser {
             print(user)
         }
