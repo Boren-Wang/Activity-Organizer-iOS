@@ -20,6 +20,7 @@ posted by other users.
 To see if an activity is posted by you, check the ​ **Author** ​ field of each activity.
 If an activity was posted by you, you can click “​ **Delete** ​” to delete the activity
 You can login other accounts by clicking the “​ **Logout** ​” button
+![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Browse%20Activity%20View.png?raw=true)
 
 
 ## Joined Activities View
