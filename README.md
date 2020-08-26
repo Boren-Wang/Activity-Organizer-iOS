@@ -51,7 +51,7 @@ This view is used to specify how you want to sort the “​ **Joined Activities
 
 ## Welcome View
 
-This is the first view of the application. The user can then choose to signup or login.
+This is the first view of the application. The user can then choose to signup or login.  
 **Credit:** ​ **_Created my free logo at LogoMakr.com @logomakr_com_**  
 ![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Welcome%20View.png?raw=true)
 
