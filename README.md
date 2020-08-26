@@ -30,7 +30,7 @@ joined here.
 If you want to quit the activity that you have joined, simply click “​ **Quit** ​” or ​ **slide the activity to the left.**
 After quitting an activity, the activity will get removed from the “​ **Joined Activities** ​” list, but you can join the activity
 again in the “​ **Browse Activity** ​” list.
-Click “​ **Detail** ​” to see additional info about an activities
+Click “​ **Detail** ​” to see additional info about an activities  
 ![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Joined%20Activity%20View.png?raw=true)
 
 
@@ -39,26 +39,26 @@ Click “​ **Detail** ​” to see additional info about an activities
 This is the view for posting and editing an activity. When the users click “​ **Detail** ​” or “​ **+** ​”, they will enter this view.
 If you were the author of the activity, then you will be able to click “​ **Edit** ​” to enter the Edit mode to modify the content.
 On the other hand, if you were not the author, then you can only view the details of the activity, but you cannot modify
-them.
+them.  
 ![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Activity%20Details%20View.png?raw=true)
 
 
 ## Settings View
 
-This view is used to specify how you want to sort the “​ **Joined Activities** ​” and “​ **Browse Activities** ​”
+This view is used to specify how you want to sort the “​ **Joined Activities** ​” and “​ **Browse Activities** ​”  
 ![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Settings%20View.png?raw=true)
 
 
 ## Welcome View
 
 This is the first view of the application. The user can then choose to signup or login.
-**Credit:** ​ **_Created my free logo at LogoMakr.com @logomakr_com_**
+**Credit:** ​ **_Created my free logo at LogoMakr.com @logomakr_com_**  
 ![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Welcome%20View.png?raw=true)
 
 
 ## Signup & Login View
 
-The user can signup or login in these views.
+The user can signup or login in these views.  
 ![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Signup%20View.png?raw=true)
 
 
