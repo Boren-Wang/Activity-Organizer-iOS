@@ -19,7 +19,7 @@ The user can edit or delete the activities that are posted by him/her, but the u
 posted by other users.
 To see if an activity is posted by you, check the ​ **Author** ​ field of each activity.
 If an activity was posted by you, you can click “​ **Delete** ​” to delete the activity
-You can login other accounts by clicking the “​ **Logout** ​” button
+You can login other accounts by clicking the “​ **Logout** ​” button  
 ![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Browse%20Activity%20View.png?raw=true)
 
 
@@ -31,6 +31,7 @@ If you want to quit the activity that you have joined, simply click “​ **Qui
 After quitting an activity, the activity will get removed from the “​ **Joined Activities** ​” list, but you can join the activity
 again in the “​ **Browse Activity** ​” list.
 Click “​ **Detail** ​” to see additional info about an activities
+![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Joined%20Activity%20View.png?raw=true)
 
 
 ## Activity Detail View
@@ -39,22 +40,26 @@ This is the view for posting and editing an activity. When the users click “�
 If you were the author of the activity, then you will be able to click “​ **Edit** ​” to enter the Edit mode to modify the content.
 On the other hand, if you were not the author, then you can only view the details of the activity, but you cannot modify
 them.
+![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Activity%20Details%20View.png?raw=true)
 
 
 ## Settings View
 
 This view is used to specify how you want to sort the “​ **Joined Activities** ​” and “​ **Browse Activities** ​”
+![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Settings%20View.png?raw=true)
 
 
 ## Welcome View
 
 This is the first view of the application. The user can then choose to signup or login.
 **Credit:** ​ **_Created my free logo at LogoMakr.com @logomakr_com_**
+![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Welcome%20View.png?raw=true)
 
 
 ## Signup & Login View
 
 The user can signup or login in these views.
+![alt text](https://github.com/Boren-Wang/Activity-Organizer-iOS/blob/master/Signup%20View.png?raw=true)
 
 
 
